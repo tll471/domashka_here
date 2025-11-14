@@ -95,6 +95,136 @@ public:
 		cout << "Tickets: " << ticket << endl;
 	}
 };
+class Auto : public Transport
+{
+	string color;
+	string model;
+public:
+	Auto(){}
+	Auto(string n, int y, int max, string w, string col, string mod)
+	{
+		name = n;
+		year = y;
+		max_speed = max;
+		weight = w;
+		color = col;
+		model = mod;
+	}
+	void Print()
+	{
+		Transport::Print();
+		cout << "---Auto info---" << endl;
+		cout << "Color: " << color << endl;
+		cout << "Model: " << model << endl;
+	}
+	string GetColor()
+	{
+		return color;
+	}
+	string GetModel()
+	{
+		return model;
+	}
+	void SetColor(string c)
+	{
+		color = c;
+	}
+	void SetModel(string m)
+	{
+		model = m;
+	}
+};
+class Bike : public Transport
+{
+	string color;
+	string type;
+public:
+	Bike(){}
+	Bike(string n, int y, int max, string w, string col, string ty)
+	{
+		name = n;
+		year = y;
+		max_speed = max;
+		weight = w;
+		color = col;
+		type = ty;
+	}
+	void Print()
+	{
+		Transport::Print();
+		cout << "---Bike info---" << endl;
+		cout << "Color: " << color << endl;
+		cout << "Type: " << type << endl;
+	}
+	string GetColor()
+	{
+		return color;
+	}
+	string GetType()
+	{
+		return type;
+	}
+	void SetColor(string c)
+	{
+		color = c;
+	}
+	void SetType(string t)
+	{
+		type = t;
+	}
+};
+class Tank : public Transport
+{
+	int bullets_count;
+	string length_of_the_weapon;
+	string color;
+public:
+	Tank(){}
+	Tank(string n, int y, int max, string w, int bullets, string length, string col)
+	{
+		name = n;
+		year = y;
+		max_speed = max;
+		weight = w;
+		bullets_count = bullets;
+		length_of_the_weapon = length;
+		color = col;
+	}
+	void Print()
+	{
+		Transport::Print();
+		cout << "---Tank info---" << endl;
+		cout << "Bullets count: " << bullets_count << endl;
+		cout << "Length of the weapon: " << length_of_the_weapon << endl;
+		cout << "Color: " << color << endl;
+	}
+
+	int GetBullets()
+	{
+		return bullets_count;
+	}
+	string GetWeapon()
+	{
+		return length_of_the_weapon;
+	}
+	string GetColor()
+	{
+		return color;
+	}
+	void SetBullets(int bul)
+	{
+		bullets_count = bul;
+	}
+	void SetWeapon(string wea)
+	{
+		length_of_the_weapon = wea;
+	}
+	void SetColor(string c)
+	{
+		color = c;
+	}
+};
+
 int main()
 {
 	Truck obj1("BMV", 2020, 200, "40", 20, 100);
@@ -107,5 +237,17 @@ int main()
 
 	Ship obj3("BMV", 2023, 180, "80", 700, 400);
 	obj3.Print();
+	cout << endl;
+
+	Auto obj4("BMV", 2025, 170, "90", "red", "Toyota");
+	obj4.Print();
+	cout << endl;
+
+	Bike obj5("BMV", 2024, 120, "40", "Green", "Urban");
+	obj5.Print();
+	cout << endl;
+
+	Tank obj6("BMV", 2014, 250, "50", 50, "5 meters", "grey");
+	obj6.Print();
 	cout << endl;
 }
