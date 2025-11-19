@@ -124,7 +124,57 @@ public:
 };
 int main()
 {
-	Elephant obj1(300, 5, 100000, "Elephant", 2, "Asia");
+	Animal* animal = nullptr;
+	int choise;
+	cout << "What do you want to create?" << endl;
+	cout << "1: Elephant" << endl;
+	cout << "2: Penguin" << endl;
+	cout << "3: Parrot" << endl;
+	cout << "4: Shark" << endl;
+	cin >> choise;
+
+	switch(choise)
+	{
+		case 1:
+		{
+			animal = new Elephant(300, 5, 100000, "Elephant", 2, "Asia");
+			animal->Move();
+			animal->Eat();
+			animal->Print();
+			break;
+		}
+		case 2:
+		{
+			animal = new Penguin(50, 1, 2000, "Penguin", "Grey", "Antarctica");
+			animal->Move();
+			animal->Eat();
+			animal->Print();
+			break;
+		}
+		case 3:
+		{
+			animal = new Parrot(1, 1, 500000, "Parrot", "Green", true);
+			animal->Move();
+			animal->Eat();
+			animal->Print();
+			break;
+		}
+		case 4:
+		{
+			animal = new Shark(120, 3, 149999, "Shark", 1000);
+			animal->Move();
+			animal->Eat();
+			animal->Print();
+			break;
+		}
+		default:
+			cout << "Error!" << endl;
+			break;
+	}
+
+	delete[] animal;
+
+	/*Elephant obj1(300, 5, 100000, "Elephant", 2, "Asia");
 	obj1.Print();
 	obj1.Eat();
 	obj1.Move();
@@ -142,5 +192,5 @@ int main()
 	Shark obj4(120, 3, 149999, "Shark", 1000);
 	obj4.Print();
 	obj4.Eat();
-	obj4.Move();
+	obj4.Move();*/
 }
