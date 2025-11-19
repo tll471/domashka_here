@@ -172,7 +172,7 @@ int main()
 			break;
 	}
 
-	delete[] animal;
+	delete animal;
 
 	/*Elephant obj1(300, 5, 100000, "Elephant", 2, "Asia");
 	obj1.Print();
