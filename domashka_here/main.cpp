@@ -84,9 +84,9 @@ int main()
     Circle circle;
     Rectangle rectangle;
     Triangle triangle;
-    Square square;
-    Rhombus rhombus;
-    Parallelogram parallelogram;
+    Square* square = new Square();
+    Rhombus* rhombus = new Rhombus();
+    Parallelogram* parallelogram = new Parallelogram();
 
     circle.SetDimension(10.0);
     circle.ShowArea();
@@ -97,13 +97,13 @@ int main()
     triangle.SetDimension(5.5, 10.0);
     triangle.ShowArea();
 
-    square.SetDimension(5);
-    square.ShowArea();
+    square->SetDimension(5);
+    square->ShowArea();
 
-    rhombus.SetDimension(10, 20);
-    rhombus.ShowArea();
+    rhombus->SetDimension(10, 20);
+    rhombus->ShowArea();
 
-    parallelogram.SetDimension(5, 10);
-    parallelogram.ShowArea();
+    parallelogram->SetDimension(5, 10);
+    parallelogram->ShowArea();
 
 }
