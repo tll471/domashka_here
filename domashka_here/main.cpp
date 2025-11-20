@@ -4,6 +4,8 @@
 //class Animal
 //{
 //protected:
+// 
+// 
 //	int weight;
 //	int height;
 //	int population;
