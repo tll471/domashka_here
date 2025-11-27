@@ -19,10 +19,8 @@ public:
         m_value1 = value1;
         m_value2 = value2;
     }
-    void ShowArea() const
-    {
-        cout << "Value is undefined" << endl;
-    }
+    virtual void ShowArea() const = 0;
+    virtual void ShowPerimetr() const = 0;
 };
 
 class Circle : public Figure
@@ -30,7 +28,11 @@ class Circle : public Figure
 public:
     void ShowArea() const
     {
-        cout << "Area of circle: " << 3.14159 * m_value1 * m_value2 << endl;
+        cout << "Area of circle: " << 3.14 * m_value1 * m_value2 << endl;
+    }
+    void ShowPerimetr() const
+    {
+        cout << "P: " << 2 * 3.14 * m_value1 << endl;
     }
 };
 
@@ -41,6 +43,10 @@ public:
     {
         cout << "Area of rectangle: " << m_value1 * m_value2 << endl;
     }
+    void ShowPerimetr() const
+    {
+        cout << "P: " << 2 * 3.14 * m_value1 << endl;
+    }
 };
 
 class Triangle : public Figure
@@ -49,6 +55,10 @@ public:
     void ShowArea() const
     {
         cout << "Area of triangle: " << 0.5 * m_value1 * m_value2 << endl;
+    }
+    void ShowPerimetr() const
+    {
+        cout << "P: " << 2 * 3.14 * m_value1 << endl;
     }
 };
 
@@ -59,6 +69,10 @@ public:
     {
         cout << "Area of square: " << m_value1 * m_value2 << endl;
     }
+    void ShowPerimetr() const
+    {
+        cout << "P: " << 2 * 3.14 * m_value1 << endl;
+    }
 };
 
 class Rhombus : public Figure
@@ -68,6 +82,10 @@ public:
     {
         cout << "Area of rhombus: " << m_value1 * m_value2 / 2 << endl;
     }
+    void ShowPerimetr() const
+    {
+        cout << "P: " << 2 * 3.14 * m_value1 << endl;
+    }
 };
 
 class Parallelogram : public Figure
@@ -76,6 +94,10 @@ public:
     void ShowArea() const
     {
         cout << "Area of parallelogram: " << m_value1 * m_value2 << endl;
+    }
+    void ShowPerimetr() const
+    {
+        cout << "P: " << 2 * 3.14 * m_value1 << endl;
     }
 };
 
@@ -90,20 +112,26 @@ int main()
 
     circle.SetDimension(10.0);
     circle.ShowArea();
+    circle.ShowPerimetr();
 
-    rectangle.SetDimension(5.5, 10.0);
+    rectangle.SetDimension(5, 10.0);
     rectangle.ShowArea();
+    rectangle.ShowPerimetr();
 
-    triangle.SetDimension(5.5, 10.0);
+    triangle.SetDimension(6, 10.0);
     triangle.ShowArea();
+    triangle.ShowPerimetr();
 
     square->SetDimension(5);
     square->ShowArea();
+    square->ShowPerimetr();
 
     rhombus->SetDimension(10, 20);
     rhombus->ShowArea();
+    rhombus->ShowPerimetr();
 
     parallelogram->SetDimension(5, 10);
     parallelogram->ShowArea();
+    parallelogram->ShowPerimetr();
 
 }
