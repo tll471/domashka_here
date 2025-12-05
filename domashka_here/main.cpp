@@ -1,137 +1,82 @@
 #include <iostream>
+#include <map>
 using namespace std;
 
-class Figure
+class Student
 {
-protected:
-
-    double m_value1;
-    double m_value2;
-
+	string name;
+	int age;
 public:
+	Student(){}
+	Student(string n, int a)
+	{
+		name = n;
+		age = a;
+	}
+	void Print()
+	{
+		cout << "Name: " << name << endl;
+		cout << "Age: " << age << endl;
+		cout << endl;
+	}
+	int GetAge()
+	{
+		return age;
+	}
+	string GetName()
+	{
+		return name;
+	}
+	void SetAge(int a)
+	{
+		age = a;
+	}
+	void SetNmae(string n)
+	{
+		name = n;
+	}
 
-    void SetDimension(const double value1)
-    {
-        SetDimension(value1, value1);
-    }
-    void SetDimension(const double value1, const double value2)
-    {
-        m_value1 = value1;
-        m_value2 = value2;
-    }
-    virtual void ShowArea() const = 0;
-    virtual void ShowPerimetr() const = 0;
 };
-
-class Circle : public Figure
+bool operator< (Student obj1, Student obj2) 
 {
-public:
-    void ShowArea() const
-    {
-        cout << "Area of circle: " << 3.14 * m_value1 * m_value2 << endl;
-    }
-    void ShowPerimetr() const
-    {
-        cout << "P: " << 2 * 3.14 * m_value1 << endl;
-    }
-};
-
-class Rectangle : public Figure
+	if (obj1.GetAge() != obj2.GetAge())
+	{
+		return obj1.GetAge() < obj2.GetAge();
+	}
+	return obj1.GetName() < obj2.GetName();
+}
+bool operator> (Student obj1, Student obj2)
 {
-public:
-    void ShowArea() const
-    {
-        cout << "Area of rectangle: " << m_value1 * m_value2 << endl;
-    }
-    void ShowPerimetr() const
-    {
-        cout << "P: " << 2 * 3.14 * m_value1 << endl;
-    }
-};
+	if (obj2.GetAge() != obj1.GetAge())
+	{
+		return obj2.GetAge() > obj1.GetAge();
+	}
+	return obj2.GetName() > obj1.GetName();
+}
 
-class Triangle : public Figure
-{
-public:
-    void ShowArea() const
-    {
-        cout << "Area of triangle: " << 0.5 * m_value1 * m_value2 << endl;
-    }
-    void ShowPerimetr() const
-    {
-        cout << "P: " << 2 * 3.14 * m_value1 << endl;
-    }
-};
-
-class Square : public Figure
-{
-public:
-    void ShowArea() const
-    {
-        cout << "Area of square: " << m_value1 * m_value2 << endl;
-    }
-    void ShowPerimetr() const
-    {
-        cout << "P: " << 2 * 3.14 * m_value1 << endl;
-    }
-};
-
-class Rhombus : public Figure
-{
-public:
-    void ShowArea() const
-    {
-        cout << "Area of rhombus: " << m_value1 * m_value2 / 2 << endl;
-    }
-    void ShowPerimetr() const
-    {
-        cout << "P: " << 2 * 3.14 * m_value1 << endl;
-    }
-};
-
-class Parallelogram : public Figure
-{
-public:
-    void ShowArea() const
-    {
-        cout << "Area of parallelogram: " << m_value1 * m_value2 << endl;
-    }
-    void ShowPerimetr() const
-    {
-        cout << "P: " << 2 * 3.14 * m_value1 << endl;
-    }
-};
+typedef pair<Student, Student> mypair;
 
 int main()
 {
-    Circle circle;
-    Rectangle rectangle;
-    Triangle triangle;
-    Square* square = new Square();
-    Rhombus* rhombus = new Rhombus();
-    Parallelogram* parallelogram = new Parallelogram();
+	map<Student, Student> dict;
+	int age;
+	string name;
+	
+	for (int i = 0; i < 5; i++)
+	{
+		cout << "Enter name: " << endl;
+		cin >> name;
+		cout << "Enter age: " << endl;
+		cin >> age;
 
-    circle.SetDimension(10.0);
-    circle.ShowArea();
-    circle.ShowPerimetr();
+		Student obj(name, age);
+		dict.insert(mypair(obj, obj));
 
-    rectangle.SetDimension(5, 10.0);
-    rectangle.ShowArea();
-    rectangle.ShowPerimetr();
+	}
 
-    triangle.SetDimension(6, 10.0);
-    triangle.ShowArea();
-    triangle.ShowPerimetr();
-
-    square->SetDimension(5);
-    square->ShowArea();
-    square->ShowPerimetr();
-
-    rhombus->SetDimension(10, 20);
-    rhombus->ShowArea();
-    rhombus->ShowPerimetr();
-
-    parallelogram->SetDimension(5, 10);
-    parallelogram->ShowArea();
-    parallelogram->ShowPerimetr();
+	for (auto ptr = dict.begin(); ptr != dict.end(); ptr++)
+	{
+		ptr->second.Print();
+	}
 
 }
