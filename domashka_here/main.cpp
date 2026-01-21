@@ -1,82 +1,71 @@
 #include <iostream>
-#include <map>
+#include <thread>
+#include <mutex>
+#include <fstream>
+#include <Windows.h>
 using namespace std;
 
-class Student
-{
-	string name;
-	int age;
-public:
-	Student(){}
-	Student(string n, int a)
-	{
-		name = n;
-		age = a;
-	}
-	void Print()
-	{
-		cout << "Name: " << name << endl;
-		cout << "Age: " << age << endl;
-		cout << endl;
-	}
-	int GetAge()
-	{
-		return age;
-	}
-	string GetName()
-	{
-		return name;
-	}
-	void SetAge(int a)
-	{
-		age = a;
-	}
-	void SetNmae(string n)
-	{
-		name = n;
-	}
+mutex m;
 
-};
-bool operator< (Student obj1, Student obj2) 
+void Create()
 {
-	if (obj1.GetAge() != obj2.GetAge())
+	m.lock();
+	ofstream file("file.txt", ios::out);
+	if (file.is_open())
 	{
-		return obj1.GetAge() < obj2.GetAge();
+		cout << "File is open!" << endl;
 	}
-	return obj1.GetName() < obj2.GetName();
-}
-bool operator> (Student obj1, Student obj2)
-{
-	if (obj2.GetAge() != obj1.GetAge())
-	{
-		return obj2.GetAge() > obj1.GetAge();
-	}
-	return obj2.GetName() > obj1.GetName();
+	file.close();
+	m.unlock();
 }
 
-typedef pair<Student, Student> mypair;
+void Fill(int arr[], int size)
+{
+	m.lock();
+	ofstream file("file.txt", ios::out);
+	if (file.is_open())
+	{
+		for (size_t i = 0; i < size; i++)
+		{
+			arr[i] = rand() % 100 + 1;
+			file << arr[i] << " ";
+		}
+	}
+	file.close();
+	m.unlock();
+}
+
+void Print(int arr[], int size)
+{
+	m.lock();
+	ifstream file2("file.txt", ios::in);
+	string value;
+
+	while (file2 >> value)
+	{
+		cout << value << ", ";
+		Sleep(20);
+	}
+	file2.close();
+	m.unlock();
+
+}
 
 int main()
 {
-	map<Student, Student> dict;
-	int age;
-	string name;
-	
-	for (int i = 0; i < 5; i++)
-	{
-		cout << "Enter name: " << endl;
-		cin >> name;
-		cout << "Enter age: " << endl;
-		cin >> age;
+	srand(time(0));
 
-		Student obj(name, age);
-		dict.insert(mypair(obj, obj));
+	const int size = 100;
+	int arr[size];
 
-	}
+	thread t1(Create);
+	thread t2(Fill, arr, size);
+	thread t3(Print, arr, size);
 
-	for (auto ptr = dict.begin(); ptr != dict.end(); ptr++)
-	{
-		ptr->second.Print();
-	}
+	t1.join();
+	t2.join();
+	t3.join();
 
+	cout << endl;
+	cout << "Ends..." << endl;
 }
